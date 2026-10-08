@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleMessage | Mensajería Telegram</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">
+                    <span>➤</span>
+                </div>
+
+                <div>
+                    <h1>TeleMessage</h1>
+                    <p>Panel de mensajería</p>
+                </div>
+            </div>
+
+            <nav class="navigation">
+
+                <a href="#inicio" class="nav-item active">
+                    <span class="nav-icon">⌂</span>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="#contactos" class="nav-item">
+                    <span class="nav-icon">♙</span>
+                    <span>Destinatarios</span>
+                </a>
+
+                <a href="#mensajes" class="nav-item">
+                    <span class="nav-icon">✉</span>
+                    <span>Mensajes</span>
+                </a>
+
+                <a href="#informacion" class="nav-item">
+                    <span class="nav-icon">ⓘ</span>
+                    <span>Información</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="bot-status">
+                    <span class="status-dot"></span>
+
+                    <div>
+                        <strong>Bot conectado</strong>
+                        <small>Telegram API</small>
+                    </div>
+                </div>
+
+                <p class="temporary-note">
+                    Sesión temporal<br>
+                    Los contactos no se guardan.
+                </p>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main">
+
+            <!-- ENCABEZADO -->
+            <header class="topbar" id="inicio">
+
+                <div>
+                    <p class="welcome">SISTEMA DE MENSAJERÍA</p>
+                    <h2>Centro de mensajes</h2>
+                    <p class="subtitle">
+                        Administra destinatarios y envía mensajes mediante tu bot de Telegram.
+                    </p>
+                </div>
+
+                <div class="connection">
+                    <span class="status-dot"></span>
+                    <span>Conectado</span>
+                </div>
+
+            </header>
+
+
+            <!-- ESTADÍSTICAS -->
+            <section class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        ♙
+                    </div>
+
+                    <div>
+                        <span>Destinatarios</span>
+                        <strong id="contactCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+                        <span>Estado del bot</span>
+                        <strong class="online">Activo</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ◷
+                    </div>
+
+                    <div>
+                        <span>Tipo de sesión</span>
+                        <strong>Temporal</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONTENIDO -->
+            <section class="dashboard-grid">
+
+
+                <!-- REGISTRAR DESTINATARIO -->
+                <div class="card register-card" id="contactos">
+
+                    <div class="card-header">
+
+                        <div>
+                            <span class="section-label">NUEVO</span>
+                            <h3>Registrar destinatario</h3>
+                            <p>
+                                Agrega temporalmente una persona a tu lista.
+                            </p>
+                        </div>
+
+                        <div class="header-icon">
+                            +
+                        </div>
+
+                    </div>
+
+
+                    <form id="contactForm">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Nombre del destinatario
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span>♙</span>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Ej. Juan Pérez"
+                                    maxlength="50"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="chatId">
+                                ID de Telegram
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span>#</span>
+
+                                <input
+                                    type="text"
+                                    id="chatId"
+                                    placeholder="Ej. 123456789"
+                                    maxlength="30"
+                                    required
+                                >
+                            </div>
+
+                            <small class="input-help">
+                                Ingresa el ID del chat al que deseas enviar el mensaje.
+                            </small>
+
+                        </div>
+
+
+                        <button type="submit" class="primary-btn">
+                            <span>+</span>
+                            Agregar destinatario
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- LISTA DE DESTINATARIOS -->
+                <div class="card contacts-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <span class="section-label">LISTA</span>
+                            <h3>Destinatarios</h3>
+                            <p>
+                                Selecciona una persona para enviarle un mensaje.
+                            </p>
+                        </div>
+
+                        <div class="counter-badge" id="contactBadge">
+                            0
+                        </div>
+
+                    </div>
+
+
+                    <div id="contactList" class="contact-list">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                ♙
+                            </div>
+
+                            <h4>No hay destinatarios</h4>
+
+                            <p>
+                                Registra un destinatario para comenzar.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ÁREA DE MENSAJES -->
+            <section class="card message-card" id="mensajes">
+
+                <div class="message-header">
+
+                    <div>
+
+                        <span class="section-label">MENSAJE</span>
+
+                        <h3>Redactar mensaje</h3>
+
+                        <p>
+                            Escribe y envía un mensaje utilizando tu bot de Telegram.
+                        </p>
+
+                    </div>
+
+
+                    <div class="selected-contact" id="selectedContact">
+
+                        <div class="selected-avatar">
+                            ?
+                        </div>
+
+                        <div>
+                            <span>Destinatario</span>
+                            <strong>Ninguno seleccionado</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="message-body">
+
+                    <label for="message">
+                        Contenido del mensaje
+                    </label>
+
+                    <textarea
+                        id="message"
+                        maxlength="4096"
+                        placeholder="Selecciona primero un destinatario..."
+                        disabled
+                    ></textarea>
+
+
+                    <div class="message-footer">
+
+                        <span id="charCount">
+                            0 / 4096
+                        </span>
+
+                        <div class="message-actions">
+
+                            <button
+                                type="button"
+                                id="clearBtn"
+                                class="secondary-btn"
+                                disabled
+                            >
+                                Limpiar
+                            </button>
+
+                            <button
+                                type="button"
+                                id="sendBtn"
+                                class="send-btn"
+                                disabled
+                            >
+                                <span>➤</span>
+                                Enviar mensaje
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULTADO -->
+                <div id="result" class="result"></div>
+
+            </section>
+
+
+            <!-- INFORMACIÓN -->
+            <section class="information" id="informacion">
+
+                <div class="info-icon">
+                    i
+                </div>
+
+                <div>
+
+                    <h3>¿Cómo funciona?</h3>
+
+                    <p>
+                        Primero registra el nombre y el ID de Telegram del destinatario.
+                        Después selecciónalo de la lista, escribe el mensaje y presiona
+                        <strong>Enviar mensaje</strong>.
+                    </p>
+
+                    <p class="warning-text">
+                        Los destinatarios se mantienen únicamente durante la sesión actual.
+                        Al cerrar o recargar la página, la lista se elimina.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- PIE DE PÁGINA -->
+            <footer>
+
+                <p>
+                    TeleMessage © 2026 · Sistema académico de mensajería
+                </p>
+
+                <span>
+                    Telegram Bot API
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
